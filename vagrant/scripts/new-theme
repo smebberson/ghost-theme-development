@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# This script will copy the default casper theme from Ghost into a new directory ready to start editing it.
+cp -fR /var/www/ghost/content/themes/casper/* /vagrant/theme
+
+# Now that we've done this, we don't want to ignore the theme directory anymore
+if [ -e /vagrant/theme/.gitignore ]; then
+	rm /vagrant/theme/.gitignore
+fi
+
+# Link the new theme into the ghost directory, using the name from ENV
+if [ ! -e /var/www/ghost/content/themes/${GHOST_THEME_NAME} ]; then
+	ln -s /vagrant/theme /var/www/ghost/content/themes/${GHOST_THEME_NAME}
+fi
+
+# Update the name and version of the theme
+sed -i "s/[0-9]\.[0-9]\.[0-9]/1.0.0/g" /vagrant/theme/package.json
+sed -i "s/Casper/${GHOST_THEME_NAME}/g" /vagrant/theme/package.json

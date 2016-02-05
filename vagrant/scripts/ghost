@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# change into the correct directory
+cd /var/www/ghost
+
+# start ghost :)
+npm start

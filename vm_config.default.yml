@@ -1,0 +1,4 @@
+hostname: ghost.local
+ip: 192.168.45.54
+memory: 1024
+cpus: 1
